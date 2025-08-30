@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=simple_store
+      - POSTGRES_USER=danmcode
+      - POSTGRES_PASSWORD=danmcode_pass
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=simple_store
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=danmcode_pass
+      - MYSQL_PORT=3306
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data:/var/lib/mysql
