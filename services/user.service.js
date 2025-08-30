@@ -1,5 +1,5 @@
-const boom = require('@hapi/boom');
 const getConnection = require('../libs/postgres');
+const { models } = require('../libs/sequelize');
 
 class UserService {
   constructor() { }
@@ -9,14 +9,8 @@ class UserService {
   }
 
   async find() {
-    const client = await getConnection();
-    const rta = await client.query(`
-    SELECT table_schema, table_name
-    FROM information_schema.tables
-    WHERE table_type = 'BASE TABLE'
-    ORDER BY table_schema, table_name;
-  `);
-    return rta.rows;
+    const users = await models.User.findAll();
+    return users;
   }
 
   async findOne(id) {

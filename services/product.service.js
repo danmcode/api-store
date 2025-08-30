@@ -1,9 +1,10 @@
 const { faker } = require('@faker-js/faker');
 const boom = require('@hapi/boom');
+const sequelize = require('../libs/sequelize');
 
 class ProductsService {
 
-  constructor(){
+  constructor() {
     this.products = [];
     this.generate();
   }
@@ -22,6 +23,7 @@ class ProductsService {
   }
 
   async create(data) {
+    sequelize();
     const newProduct = {
       id: faker.datatype.uuid(),
       ...data

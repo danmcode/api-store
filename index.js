@@ -26,7 +26,6 @@ app.get('/', (_, res) => {
   res.send('simple store api');
 });
 
-
 routerApi(app);
 
 app.use(logErrors);
