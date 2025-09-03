@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { CUSTOMER_TABLE } = require('./customer.model');
+const { get } = require('../../routes/orders.router');
 
 const ORDER_TABLE = 'orders';
 
@@ -27,6 +28,20 @@ const OrderSchema = {
         field: 'created_at',
         defaultValue: Sequelize.NOW,
     },
+    total: {
+        allowNull: false,
+        type: DataTypes.DECIMAL(10, 2),
+        field: 'total',
+        get() {
+            if (this.items.lenght > 0) {
+                return this.items.reduce((total, item) => {
+                    return total + (item.price * item.OrderProduct.amount)
+                }, 0)
+            }
+
+            return 0;
+        }
+    }
 }
 
 
